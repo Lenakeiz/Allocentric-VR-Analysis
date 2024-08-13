@@ -126,7 +126,7 @@ set(hf, ...
     'Name', 'cbrewer2: Colour maps', ...
     'MenuBar', 'none')
 
-export_fig(hf, 'cbrewer2_samples', '-eps', '-png', '-painters', '-nocrop');
+%export_fig(hf, 'cbrewer2_samples', '-eps', '-png', '-painters', '-nocrop');
 
 end
 

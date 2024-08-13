@@ -29,7 +29,7 @@ AlloData_SPSS_Tot.FourMT(22) = 7;
 %% Plotting the results
 
 %1 is elder, 2 is young, 4 is chance
-groupColors = cbrewer('qual', 'Set1', 6);
+groupColors = cbrewer2('qual', 'Set1', 6);
 groupColors = groupColors([2 1],:);
 legendData = {'Young' 'Elderly'};
 
@@ -49,15 +49,13 @@ data.MarkerSize = 20;
 data.Color = [groupColors(2,:) 0.5];
 fit = p(2,1);
 fit.Color = [groupColors(2,:)*0.2 0.7];
-fit.LineWidth = 2;
+fit.LineWidth = 5;
 cb = p(3,1);
 cb.Color = [groupColors(2,:) 0.6];
 cb.LineWidth = 5;
-cb = p(4,1);
-cb.Color = [groupColors(2,:) 0.6];
-cb.LineWidth = 5;
-
-p(2,1).LineWidth = 5;
+% cb = p(4,1);
+% cb.Color = [groupColors(2,:) 0.6];
+% cb.LineWidth = 5;
 
 ax = gca;
 ax.XAxis.LineWidth = 8;

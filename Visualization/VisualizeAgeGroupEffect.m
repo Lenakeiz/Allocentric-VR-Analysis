@@ -18,14 +18,14 @@ dataPlot = [dataStruct{1};dataStruct{2}];
 blocks = [ones(21,1);ones(23,1)*2];
 [meanS, stdS] = grpstats(dataPlot,blocks,{'mean','std'});
 %
-%CreateCustomFigure;
+CreateCustomFigure;
 
 %%
 subplot(1,3,1)
 
 jitter = 0.6;
 %1 is elder, 2 is young, 4 is chance
-groupColors = cbrewer('qual', 'Set1', 6);
+groupColors = cbrewer2('qual', 'Set1', 6);
 groupColors = groupColors([2 1],:);
 
 plotone = notBoxPlot(dataPlot,blocks, 'jitter', jitter, 'interval', 'tInterval');

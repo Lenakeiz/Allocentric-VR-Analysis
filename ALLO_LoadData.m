@@ -1,5 +1,5 @@
 %% Main script 
-% % First part is loading data from the VR
+% % Loading data for the iVR
 % % 
 % % TrialType:
 % %     WALKEGO = 1;
@@ -9,7 +9,7 @@
 % % ParticipantGroup:
 % %     YC  = 1;
 % %     HC  = 2;
-% %     MCI = 99; not used;
+% %     MCI = 99; not used in this analysis
 % % 
 % % 
 
