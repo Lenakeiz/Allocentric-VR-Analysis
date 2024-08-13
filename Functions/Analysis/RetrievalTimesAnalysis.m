@@ -35,10 +35,10 @@ Young.RT.Sample = AlloData.MeanRetrievalTime(AlloData.ParticipantGroup == 1 & Al
 Older.RT.Sample = AlloData.MeanRetrievalTime(AlloData.ParticipantGroup == 2 & AlloData.ConfigurationType == conftype & AlloData.TrialType == trialtype & ~isnan(AlloData.MeanRetrievalTime));
 
 figure;
-subtightplot(2,1,1)
+subplot(2,1,1)
 scatter(Young.RT.Sample,Young.ADE.Sample);
 axis equal
-subtightplot(2,1,2)
+subplot(2,1,2)
 scatter(Older.RT.Sample,Older.ADE.Sample);
 axis equal
 
@@ -54,7 +54,7 @@ Young.RT.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.Partic
 Older.RT.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantGroup == 2 & AlloData_SPSS_Cond_Conf.ConfigurationType == conftype & AlloData_SPSS_Cond_Conf.TrialType == trialtype );
 
 CreateCustomFigure;
-subtightplot(2,1,1)
+subplot(2,1,1)
 %scatter(Young.RT.Sample,Young.ADE.Sample);
 hold on
 tbl = table(Young.RT.Sample, Young.ADE.Sample);
@@ -63,7 +63,7 @@ mdl = fitlm(tbl,'linear');
 plot(mdl);
 hold off
 
-subtightplot(2,1,2)
+subplot(2,1,2)
 %scatter(Older.RT.Sample,Older.ADE.Sample);
 hold on
 tbl = table(Older.RT.Sample,Older.ADE.Sample);
@@ -92,10 +92,10 @@ Older.ADE.Sample(isoutlier(Older.ADE.Sample,'grubbs')) = nan;
 Young.RT.Sample(isoutlier(Young.RT.Sample,'grubbs')) = nan;
 Older.RT.Sample(isoutlier(Older.RT.Sample,'grubbs')) = nan;
 
-groupColors = cbrewer('qual', 'Set1', 6);
+groupColors = [config.]cbrewer('qual', 'Set1', 6);
 
 CreateCustomFigure;
-subtightplot(1,2,1,[0.01,0.1],0.2,0.1)
+subplot(1,2,1)
 %scatter(Young.RT.Sample,Young.ADE.Sample);
 hold on
 tbl = table(Young.RT.Sample, Young.ADE.Sample);
@@ -132,7 +132,7 @@ ax.XLabel.Interpreter = 'tex';
 ax.XLabel.String = {'RT({\mu})'};
 xlim([0 12]);
 
-subtightplot(1,2,2,[0.01,0.1],0.2,0.1)
+subplot(1,2,2)
 %scatter(Older.RT.Sample,Older.ADE.Sample);
 hold on
 tbl = table(Older.RT.Sample,Older.ADE.Sample + 1.4);
