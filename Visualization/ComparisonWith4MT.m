@@ -42,10 +42,10 @@ scatter(AlloData_SPSS_Tot.FourMT, AlloData_SPSS_Tot.MeanADE, config.plotSettings
 hold on;
 
 % Plot the fitted line
-plot(x_fit, y_fit, 'Color', [config.colorPalette.darkGray 0.9], 'LineWidth', lineWidth);
+h_fit = plot(x_fit, y_fit, 'Color', [config.colorPalette.darkGray 0.9], 'LineWidth', lineWidth);
 
 % Plot the confidence intervals
-plot(x_fit, y_ci(:,1), 'Color', [config.colorPalette.lightGray 0.2], 'LineWidth', lineWidth, 'LineStyle', '--');
+plot(x_fit, y_ci(:,1), 'Color', [config.colorPalette.lightGray 0.7], 'LineWidth', lineWidth, 'LineStyle', '--');
 plot(x_fit, y_ci(:,2), 'Color', [config.colorPalette.lightGray 0.7], 'LineWidth', lineWidth, 'LineStyle', '--');
 
 % Customize axes appearance
@@ -73,7 +73,8 @@ ax.XLabel.FontSize = fontSize + 2;
 xlim([0, 15]);
 
 % Add the legend with R²_adjusted value
-legend(['R²_{adj} = ' num2str(R2_adjusted, 2)], 'Location', 'best');
+legend('off')
+text(0.5, 0.5, ['R^{2}_{adj} = ' num2str(R2_adjusted, 2)], 'FontSize', fontSize, 'FontName', config.plotSettings.FontName);
 
 % Ensure the Output folder exists
 outputFolder = 'Output';

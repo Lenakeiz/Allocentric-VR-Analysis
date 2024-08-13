@@ -5,10 +5,12 @@ markerSize = config.plotSettings.MarkerSize;
 lineWidth = config.plotSettings.LineWidth;
 axisLineWidth = config.plotSettings.AxisLineWidth;
 fontSize = config.plotSettings.FontSize;
+scatterFaceAlpha = config.plotSettings.MarkerScatterFaceAlpha;
+scatterEdgeAlpha = config.plotSettings.MarkerScatterEdgeAlpha;
 
 % Desired figure size
-plotWidthInches = 6;  % Width in inches
-plotHeightInches = 4; % Height in inches
+plotWidthInches = 2;  % Width in inches
+plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;
 
@@ -28,23 +30,23 @@ mdl = fitlm(tbl, 'linear'); % Printing the results
 
 % Get the adjusted R² value
 R2_adjusted = mdl.Rsquared.Adjusted;
-p = plot(mdl);
 
-% Configure plot appearance
-data = p(1,1);
-data.MarkerEdgeColor = 'none';
-data.MarkerFaceColor = elderColor;
-data.Marker = 'o';
-data.MarkerSize = markerSize;
-data.Color = [elderColor, 0.5];
+% Define the range for x-axis
+x_fit = linspace(0, 15, 100)';  % Create x values from 0 to 15
+% Use predict to get the fitted values and confidence intervals
+[y_fit, y_ci] = predict(mdl, x_fit);
 
-fit = p(2,1);
-fit.Color = [elderColor * 0.2, 0.7];
-fit.LineWidth = lineWidth;
+% Plot the data points
+scatter(AlloData_SPSS_Tot.FourMT, AlloData_SPSS_Tot.MeanADE, config.plotSettings.MarkerScatterSize, 'MarkerFaceColor',elderColor, MarkerFaceAlpha=scatterFaceAlpha, MarkerEdgeColor=elderColor, MarkerEdgeAlpha=scatterEdgeAlpha);
 
-cb = p(3,1);
-cb.Color = [elderColor, 0.6];
-cb.LineWidth = lineWidth;
+hold on;
+
+% Plot the fitted line
+h_fit = plot(x_fit, y_fit, 'Color', [config.colorPalette.darkGray 0.9], 'LineWidth', lineWidth);
+
+% Plot the confidence intervals
+plot(x_fit, y_ci(:,1), 'Color', [config.colorPalette.lightGray 0.7], 'LineWidth', lineWidth, 'LineStyle', '--');
+plot(x_fit, y_ci(:,2), 'Color', [config.colorPalette.lightGray 0.7], 'LineWidth', lineWidth, 'LineStyle', '--');
 
 % Customize axes appearance
 ax = gca;
@@ -71,7 +73,8 @@ ax.XLabel.FontSize = fontSize + 2;
 xlim([0, 15]);
 
 % Add the legend with R²_adjusted value
-legend(['R²_{adjusted} = ' num2str(R2_adjusted, 2)], 'Location', 'best');
+legend('off')
+text(4, 1.2, ['R^{2}_{adj} = ' num2str(R2_adjusted, 2)], 'FontSize', fontSize, 'FontName', config.plotSettings.FontName);
 
 % Ensure the Output folder exists
 outputFolder = 'Output';
@@ -93,25 +96,3 @@ disp(['Figure saved as ' pngFile ' and ' svgFile]);
 
 % Finalize and clear
 hold off;
-
-%%
-
-hfig = figure;  % save the figure handle in a variable
-t = 0:0.02:10; x = t.*sin(2*pi*t)+ 2*rand(1,length(t)); % data
-plot(t,x,'k-','LineWidth',1.5,'DisplayName','$\Omega(t)$');
-xlabel('time $t$ (s)')
-ylabel('$\Omega$ (V)')
-fname = 'myfigure';
-
-picturewidth = 5; % set this parameter and keep it forever
-hw_ratio = 1; % feel free to play with this ratio
-set(findall(hfig,'-property','FontSize'),'FontSize',17) % adjust fontsize to your document
-
-set(findall(hfig,'-property','Box'),'Box','off') % optional
-set(findall(hfig,'-property','Interpreter'),'Interpreter','latex') 
-set(findall(hfig,'-property','TickLabelInterpreter'),'TickLabelInterpreter','latex')
-set(hfig,'Units','centimeters','Position',[3 3 picturewidth hw_ratio*picturewidth])
-pos = get(hfig,'Position');
-set(hfig,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)])
-%print(hfig,fname,'-dpdf','-painters','-fillpage')
-print(hfig,fname,'-dpng','-painters')
