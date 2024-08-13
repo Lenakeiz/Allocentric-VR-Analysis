@@ -1,0 +1,117 @@
+%% Queen Square VR correlation with 4mt task
+% Extracting plotting settings from config
+elderColor = config.colorPalette.elderly;
+markerSize = config.plotSettings.MarkerSize;
+lineWidth = config.plotSettings.LineWidth;
+axisLineWidth = config.plotSettings.AxisLineWidth;
+fontSize = config.plotSettings.FontSize;
+
+% Desired figure size
+plotWidthInches = 6;  % Width in inches
+plotHeightInches = 4; % Height in inches
+
+dpi = 300;
+
+% Create figure and set the size and background color to white
+figure('Units', 'inches', 'Position', [1, 1, plotWidthInches, plotHeightInches], 'Color', 'white');
+
+% Set paper size for saving in inches
+set(gcf, 'PaperUnits', 'inches');
+set(gcf, 'PaperPosition', [0, 0, plotWidthInches, plotHeightInches]);
+set(gcf, 'PaperSize', [plotWidthInches, plotHeightInches]);
+set(gcf, 'PaperPositionMode', 'auto');  % Ensure that the saved figure matches the on-screen size
+
+% Prepare and fit linear model
+tbl = table(AlloData_SPSS_Tot.FourMT, AlloData_SPSS_Tot.MeanADE);
+tbl.Properties.VariableNames = {'4MT', 'ADE'};
+mdl = fitlm(tbl, 'linear'); % Printing the results
+
+% Get the adjusted R² value
+R2_adjusted = mdl.Rsquared.Adjusted;
+p = plot(mdl);
+
+% Configure plot appearance
+data = p(1,1);
+data.MarkerEdgeColor = 'none';
+data.MarkerFaceColor = elderColor;
+data.Marker = 'o';
+data.MarkerSize = markerSize;
+data.Color = [elderColor, 0.5];
+
+fit = p(2,1);
+fit.Color = [elderColor * 0.2, 0.7];
+fit.LineWidth = lineWidth;
+
+cb = p(3,1);
+cb.Color = [elderColor, 0.6];
+cb.LineWidth = lineWidth;
+
+% Customize axes appearance
+ax = gca;
+ax.XAxis.LineWidth = axisLineWidth;
+ax.YAxis.LineWidth = axisLineWidth;
+ax.Title.String = '';
+ax.FontName = config.plotSettings.FontName;
+ax.FontSize = fontSize;
+
+ax.Box = 'off';  % Remove top and right axes
+ax.XColor = 'black'; % Set color for bottom X-axis
+ax.YColor = 'black'; % Set color for left Y-axis
+
+% Customize Y axis label
+ax.YLabel.Interpreter = 'tex';
+ax.YLabel.String = {'average distance error (m)'};
+ax.YLabel.FontSize = fontSize + 2;
+ylim([0, 5]);
+
+% Customize X axis label
+ax.XLabel.Interpreter = 'tex';
+ax.XLabel.String = {'four mountain test score'};
+ax.XLabel.FontSize = fontSize + 2;
+xlim([0, 15]);
+
+% Add the legend with R²_adjusted value
+legend(['R²_{adjusted} = ' num2str(R2_adjusted, 2)], 'Location', 'best');
+
+% Ensure the Output folder exists
+outputFolder = 'Output';
+if ~exist(outputFolder, 'dir')
+    mkdir(outputFolder);
+end
+
+% Define the full paths for saving
+pngFile = fullfile(outputFolder, '4mtvsade.png');
+svgFile = fullfile(outputFolder, '4mtvsade.svg');
+
+% Save the figure as PNG with the specified DPI
+print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
+
+% Save the figure as SVG with a tight layout
+print(svgFile, '-dsvg'); % Save as SVG
+
+disp(['Figure saved as ' pngFile ' and ' svgFile]);
+
+% Finalize and clear
+hold off;
+
+%%
+
+hfig = figure;  % save the figure handle in a variable
+t = 0:0.02:10; x = t.*sin(2*pi*t)+ 2*rand(1,length(t)); % data
+plot(t,x,'k-','LineWidth',1.5,'DisplayName','$\Omega(t)$');
+xlabel('time $t$ (s)')
+ylabel('$\Omega$ (V)')
+fname = 'myfigure';
+
+picturewidth = 5; % set this parameter and keep it forever
+hw_ratio = 1; % feel free to play with this ratio
+set(findall(hfig,'-property','FontSize'),'FontSize',17) % adjust fontsize to your document
+
+set(findall(hfig,'-property','Box'),'Box','off') % optional
+set(findall(hfig,'-property','Interpreter'),'Interpreter','latex') 
+set(findall(hfig,'-property','TickLabelInterpreter'),'TickLabelInterpreter','latex')
+set(hfig,'Units','centimeters','Position',[3 3 picturewidth hw_ratio*picturewidth])
+pos = get(hfig,'Position');
+set(hfig,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize',[pos(3), pos(4)])
+%print(hfig,fname,'-dpdf','-painters','-fillpage')
+print(hfig,fname,'-dpng','-painters')

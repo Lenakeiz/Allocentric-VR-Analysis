@@ -84,25 +84,24 @@ groupingCounter              = 1;
 % %     0 is the longer side of the L shape, 1 otherwise
 % % 
 % % 
-% %                             +----------XXXXX
-% %                             |               XXX
-% %                             +----+            XX
-% %                             |    |             XX
-% %                             | 0  |               XX
-% %                             |    |                X
-% %                             |    |                +
-% %                             |    |                |
-% %                             |    |                |
-% %                             |    |                |
-% %                             +--------------+      |
-% %                             |    |         |      |
-% %                             |    |       1 |      |
-% %                             +----+---------+------+
-% % 
-% %                             CONDITIONS:
-% %                             WALKEGO = 1;
-% %                             WALKALLO = 2;
-% %                             TELEPORT = 3;
+% %     +----------XXXXX
+% %     |               XXX
+% %     +----+            XX
+% %     |    |             XX
+% %     | 0  |               XX
+% %     |    |                X
+% %     |    |                +
+% %     |    |                |
+% %     |    |                |
+% %     |    |                |
+% %     +--------------+      |
+% %     |    |         |      |
+% %     |    |       1 |      |
+% %     +----+---------+-----
+% %     CONDITIONS:
+% %     WALKEGO = 1;
+% %     WALKALLO = 2;
+% %     TELEPORT = 3;
 
         AlloData.StartingSide = strcmp(rawData.Block.SwitchSide.Text,'true');
 
