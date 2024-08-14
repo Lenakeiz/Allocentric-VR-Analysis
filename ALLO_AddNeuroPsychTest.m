@@ -1,7 +1,7 @@
 HC_NeuroPsychData  = readtable('ALLOCompiledData201119.csv');
 
-AlloData_SPSS_Tot = cell2table(cell(0,5));%array2table(zeros(size(uniqueID,1) * 6,6) );
-AlloData_SPSS_Tot.Properties.VariableNames = {'ParticipantID', 'ParticipantGroup', 'MeanADE', 'MeanRT', 'FourMT'};
+AlloData_Elderly_4MT = cell2table(cell(0,5));%array2table(zeros(size(uniqueID,1) * 6,6) );
+AlloData_Elderly_4MT.Properties.VariableNames = {'ParticipantID', 'ParticipantGroup', 'MeanADE', 'MeanRT', 'FourMT'};
 uniqueID = unique(AlloData_SPSS_Cond_Conf.ParticipantID(AlloData_SPSS_Cond_Conf.ParticipantGroup == 2));
 
 
@@ -12,10 +12,7 @@ for i = 1:size(uniqueID,1)
     tempTable.Properties.VariableNames = {'ParticipantID','ParticipantGroup', 'MeanADE', 'MeanRT', 'FourMT'};
     tempTable.ParticipantID = currOriginalId;
     tempTable.ParticipantGroup(1) = 2;
-    % tempTable.MeanADE(1) = mean(AlloData_SPSS_Cond_Conf.MeanADE(AlloData_SPSS_Cond_Conf.ParticipantID == uniqueID(i) & (AlloData_SPSS_Cond_Conf.TrialType == 2 | AlloData_SPSS_Cond_Conf.TrialType == 3)));
-    % tempTable.MeanRT(1) = mean(AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantID == uniqueID(i)   & (AlloData_SPSS_Cond_Conf.TrialType == 2 | AlloData_SPSS_Cond_Conf.TrialType == 3)));
     tempTable.MeanADE(1) = mean(AlloData_SPSS_Cond_Conf.MeanADE(AlloData_SPSS_Cond_Conf.ParticipantID == uniqueID(i) & (AlloData_SPSS_Cond_Conf.TrialType == 3)));
-    tempTable.MeanRT(1) = mean(AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantID == uniqueID(i)   & (AlloData_SPSS_Cond_Conf.TrialType == 3)));
     currFourMT = HC_NeuroPsychData.IV_MT(HC_NeuroPsychData.ID == currOriginalId);
     if isempty(currFourMT)
         tempTable.FourMT(1) = nan;
@@ -23,5 +20,5 @@ for i = 1:size(uniqueID,1)
         tempTable.FourMT(1) = currFourMT;
     end
     
-    AlloData_SPSS_Tot = [AlloData_SPSS_Tot; tempTable];
+    AlloData_Elderly_4MT = [AlloData_Elderly_4MT; tempTable];
 end

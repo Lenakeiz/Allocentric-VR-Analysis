@@ -4,14 +4,16 @@
 tempData = AlloData_SPSS_Cond_Conf(:,[1 2 3 4 5 6]);
 for i = 1:2
     tempDataBlock = tempData(tempData.ParticipantGroup == i,:);
-    tempArray = accumarray(tempDataBlock.ParticipantID,tempDataBlock.MeanADE, [], @nanmean);
-    tempArray(tempArray==0) = nan;
-    tempArray(any(isnan(tempArray),2), :) = [];
-    dataStruct{i}{1} = tempArray;
-    tempArray = accumarray(tempDataBlock.ParticipantID,tempDataBlock.MeanRT, [], @nanmean);
-    tempArray(tempArray==0) = nan;
-    tempArray(any(isnan(tempArray),2), :) = [];
-    dataStruct{i}{2} = tempArray;
+    %tempDataBlock = tempData(tempData.ParticipantGroup == i & tempData.ConfigurationType == 4,:);
+    %lock = tempData(tempData.ParticipantGroup == i & tempData.ConfigurationType == 4 & tempData.TrialType == 3,:);
+    aarray = accumarray(tempDataBlock.ParticipantID,tempDataBlock.MeanADE, [], @nanmean);
+    aarray(aarray==0) = nan;
+    aarray(any(isnan(aarray),2), :) = [];
+    dataStruct{i}{1} = aarray;
+    aarray = accumarray(tempDataBlock.ParticipantID,tempDataBlock.MeanRT, [], @nanmean);
+    aarray(aarray==0) = nan;
+    aarray(any(isnan(aarray),2), :) = [];
+    dataStruct{i}{2} = aarray;
 end
 
 %1 is elder, 2 is young, 4 is chance
@@ -69,7 +71,7 @@ for kk = 1:2
     
     hold off;
 end
-%%
+
 %s = suptitle('Associations between average displacement error and retrieval time');
 %s.FontName = 'Times New Roman';
 %s.FontSize = 40;
@@ -88,10 +90,10 @@ Older.ADE.Sample = AlloData_SPSS_Cond_Conf.MeanADE(AlloData_SPSS_Cond_Conf.Parti
 Young.RT.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantGroup == 1 & AlloData_SPSS_Cond_Conf.ConfigurationType == young_conftype & AlloData_SPSS_Cond_Conf.TrialType == young_trialtype );
 Older.RT.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantGroup == 2 & AlloData_SPSS_Cond_Conf.ConfigurationType == elder_conftype & AlloData_SPSS_Cond_Conf.TrialType == elder_trialtype );
 
-groupColors = [config.colorPalette.young; config.colorPalette.elderly];
+groupColors = cbrewer('qual', 'Set1', 6);
 
 CreateCustomFigure;
-subplot(1,2,1)
+subtightplot(1,2,1,[0.01,0.1],0.2,0.1)
 %scatter(Young.RT.Sample,Young.ADE.Sample);
 hold on
 tbl = table(Young.RT.Sample, Young.ADE.Sample);
@@ -128,7 +130,7 @@ ax.XLabel.Interpreter = 'tex';
 ax.XLabel.String = {'RT({\mu})'};
 xlim([0 12]);
 
-subplot(1,2,2)
+subtightplot(1,2,2,[0.01,0.1],0.2,0.1)
 %scatter(Older.RT.Sample,Older.ADE.Sample);
 hold on
 tbl = table(Older.RT.Sample,Older.ADE.Sample + 1.4);
@@ -165,5 +167,9 @@ ylim([0 5]);
 ax.XLabel.Interpreter = 'tex';
 ax.XLabel.String = {'RT({\mu})'};
 xlim([0 12]);
+
+%s = suptitle('Absolute Distance Error vs Retrieval Time - 4 obj - Allocentric (TP)');
+%s.FontSize = 30;
+%s.FontName = 'Times New Roman';
 
 clearvars -except AlloData AlloData_SPSS_Cond_Conf HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config

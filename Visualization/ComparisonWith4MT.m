@@ -24,9 +24,9 @@ set(gcf, 'PaperSize', [plotWidthInches, plotHeightInches]);
 set(gcf, 'PaperPositionMode', 'auto');  % Ensure that the saved figure matches the on-screen size
 
 % Prepare and fit linear model
-tbl = table(AlloData_SPSS_Tot.FourMT, AlloData_SPSS_Tot.MeanADE);
+tbl = table(AlloData_Elderly_4MT.FourMT, AlloData_Elderly_4MT.MeanADE);
 tbl.Properties.VariableNames = {'4MT', 'ADE'};
-mdl = fitlm(tbl, 'linear'); % Printing the results
+mdl = fitlm(tbl, 'linear', 'RobustOpts', 'bisquare')
 
 % Get the adjusted R² value
 R2_adjusted = mdl.Rsquared.Adjusted;
@@ -37,7 +37,7 @@ x_fit = linspace(0, 15, 100)';  % Create x values from 0 to 15
 [y_fit, y_ci] = predict(mdl, x_fit);
 
 % Plot the data points
-scatter(AlloData_SPSS_Tot.FourMT, AlloData_SPSS_Tot.MeanADE, config.plotSettings.MarkerScatterSize, 'MarkerFaceColor',elderColor, MarkerFaceAlpha=scatterFaceAlpha, MarkerEdgeColor=elderColor, MarkerEdgeAlpha=scatterEdgeAlpha);
+scatter(AlloData_Elderly_4MT.FourMT, AlloData_Elderly_4MT.MeanADE, config.plotSettings.MarkerScatterSize, 'MarkerFaceColor',elderColor, MarkerFaceAlpha=scatterFaceAlpha, MarkerEdgeColor=elderColor, MarkerEdgeAlpha=scatterEdgeAlpha);
 
 hold on;
 
@@ -96,3 +96,5 @@ disp(['Figure saved as ' pngFile ' and ' svgFile]);
 
 % Finalize and clear
 hold off;
+
+clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config

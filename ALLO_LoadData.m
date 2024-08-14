@@ -115,7 +115,11 @@ ALLO_AddNeuroPsychTest;
 warning('on','all');
 
 % Clear remaining temporary variables
-clear folderpath folderYoung folderHealthyControl files allNames allNamesUnique allNamesHeader currSize currHeader currTable currGroupedData i
+% Andrea: original clear
+% clear folderpath folderYoung folderHealthyControl files allNames allNamesUnique allNamesHeader currSize currHeader currTable currGroupedData i
+clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config
+
+
 
 %%
 % Function to extract data from the specified folder

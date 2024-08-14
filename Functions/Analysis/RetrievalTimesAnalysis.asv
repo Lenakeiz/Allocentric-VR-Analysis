@@ -1,13 +1,4 @@
-% Analysing the retrieval time
-
-youngcolor = config.colorPalette.young;
-elderColor = config.colorPalette.elderly;
-markerSize = config.plotSettings.MarkerSize;
-lineWidth = config.plotSettings.LineWidth;
-axisLineWidth = config.plotSettings.AxisLineWidth;
-fontSize = config.plotSettings.FontSize;
-scatterFaceAlpha = config.plotSettings.MarkerScatterFaceAlpha;
-scatterEdgeAlpha = config.plotSettings.MarkerScatterEdgeAlpha;
+% This script explores the retrieval times
 
 Young_RT.Sample = AlloData.MeanRetrievalTime(AlloData.ParticipantGroup == 1 & ~isnan(AlloData.MeanRetrievalTime));
 Elderly_RT.Sample = AlloData.MeanRetrievalTime(AlloData.ParticipantGroup == 2 & ~isnan(AlloData.MeanRetrievalTime));
@@ -22,77 +13,12 @@ Elderly_RT.Vector = bootstrp(N,@nanmean,Elderly_RT.Sample);
 Elderly_RT.Mean = nanmean(Elderly_RT.Vector);
 Elderly_RT.CI = bootci(N,@nanmean,Elderly_RT.Sample);
 
-% Perform two-sample t-test
-[h, p, ci, stats] = ttest2(Young_RT.Vector, Elderly_RT.Vector);
-
-% Display the t-test result
-disp(['t-test result:']);
-disp(['t-statistic = ' num2str(stats.tstat)]);
-disp(['p-value = ' num2str(p)]);
-disp(['Degrees of freedom = ' num2str(stats.df)]);
-disp(['95% Confidence Interval of the difference = [' num2str(ci(1)) ', ' num2str(ci(2)) ']']);
-
-% Desired figure size
-plotWidthInches = 3;  % Width in inches
-plotHeightInches = 2.5; % Height in inches
-
-dpi = 300;
-
-% Create figure and set the size and background color to white
-figure('Units', 'inches', 'Position', [1, 1, plotWidthInches, plotHeightInches], 'Color', 'white');
-
-% Set paper size for saving in inches
-set(gcf, 'PaperUnits', 'inches');
-set(gcf, 'PaperPosition', [0, 0, plotWidthInches, plotHeightInches]);
-set(gcf, 'PaperSize', [plotWidthInches, plotHeightInches]);
-set(gcf, 'PaperPositionMode', 'auto');  % Ensure that the saved figure matches the on-screen size
-
-histogram(Young_RT.Vector, 'FaceColor', youngcolor, 'EdgeColor', youngcolor * 0.8, 'Normalization', 'probability');
+figure;
+histogram(Young_RT.Vector)
 hold on
-histogram(Elderly_RT.Vector, 'FaceColor', elderColor, 'EdgeColor', youngcolor * 0.8, 'Normalization', 'probability');
+histogram(Elderly_RT.Vector)
 
-ax = gca;
-ax.XAxis.LineWidth = axisLineWidth;
-ax.YAxis.LineWidth = axisLineWidth;
-ax.Title.String = '';
-ax.FontName = config.plotSettings.FontName;
-ax.FontSize = fontSize;
-
-ax.Box = 'off';  % Remove top and right axes
-ax.XColor = 'black'; % Set color for bottom X-axis
-ax.YColor = 'black'; % Set color for left Y-axis
-
-% Customize Y axis label
-ax.YLabel.Interpreter = 'tex';
-ax.YLabel.String = {'probability'};
-ax.YLabel.FontSize = fontSize + 2;
-
-% Customize X axis label
-ax.XLabel.Interpreter = 'tex';
-ax.XLabel.String = {'bootstrapped mean retrieval time (s)'};
-ax.XLabel.FontSize = fontSize + 2;
-
-% Ensure the Output folder exists
-outputFolder = 'Output';
-if ~exist(outputFolder, 'dir')
-    mkdir(outputFolder);
-end
-
-% Define the full paths for saving
-pngFile = fullfile(outputFolder, 'retrievaltimeageing.png');
-svgFile = fullfile(outputFolder, 'retrievaltimeageing.svg');
-
-% Save the figure as PNG with the specified DPI
-print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
-
-% Save the figure as SVG with a tight layout
-print(svgFile, '-dsvg'); % Save as SVG
-
-disp(['Figure saved as ' pngFile ' and ' svgFile]);
-
-% Finalize and clear
-hold off;
-
+%%
 clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config
 
 %% Plotting mean ade vs mean rt
