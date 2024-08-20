@@ -1,4 +1,4 @@
-function [bsRand,bsSample,bsTtest] = ChanceCalculation(Data,pGroup,varargin)
+function [bsRand,bsSample,bsTtest] = ChanceCalculationDelete(Data,pGroup,varargin)
 % This script will look at the chance calculation from a configuration
 % bsRand is the shuffled vector
 % bsSample is the bootstrap from data

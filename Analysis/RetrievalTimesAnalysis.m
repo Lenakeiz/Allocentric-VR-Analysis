@@ -1,5 +1,5 @@
 % Analysing the retrieval time. Comparison between young and elderly
-youngcolor = config.colorPalette.young;
+youngColor = config.colorPalette.young;
 elderColor = config.colorPalette.elderly;
 markerSize = config.plotSettings.MarkerSize;
 lineWidth = config.plotSettings.LineWidth;
@@ -54,14 +54,14 @@ set(gcf, 'PaperPosition', [0, 0, plotWidthInches, plotHeightInches]);
 set(gcf, 'PaperSize', [plotWidthInches, plotHeightInches]);
 set(gcf, 'PaperPositionMode', 'auto');  % Ensure that the saved figure matches the on-screen size
 
-hY = histogram(RetrievalTime.Young.Vector, 'FaceColor', youngcolor, 'EdgeColor', youngcolor * 0.8, 'Normalization', 'probability');
-hE = histogram(RetrievalTime.Elderly.Vector, 'FaceColor', elderColor, 'EdgeColor', youngcolor * 0.8, 'Normalization', 'probability');
+hY = histogram(RetrievalTime.Young.Vector, 'FaceColor', youngColor, 'EdgeColor', youngColor * 0.8, 'Normalization', 'probability');
+hE = histogram(RetrievalTime.Elderly.Vector, 'FaceColor', elderColor, 'EdgeColor', youngColor * 0.8, 'Normalization', 'probability');
 
 % Calculating the kernel density estimate
 [f_young, xi_young] = kde(RetrievalTime.Young.Vector, 'Bandwidth', 0.1);
 binWidthY = hY.BinWidth;
 f_young = f_young * binWidthY;
-plot(xi_young, f_young, 'Color',  youngcolor*0.6, 'LineWidth', 2);
+plot(xi_young, f_young, 'Color',  youngColor*0.6, 'LineWidth', 2);
 
 % Calculating the kernel density estimate
 [f_elderly, xi_elderly] = kde(RetrievalTime.Elderly.Vector, 'Bandwidth', 0.1);
@@ -123,37 +123,6 @@ disp(['Figure saved as ' pngFile ' and ' svgFile]);
 hold off;
 
 clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config RetrievalTime
-
-%% Plotting mean ade vs mean retrieval time
-conftype = 4;
-trialtype = 3;
-
-RetrievalTime.Young.Mean_ade = AlloData_SPSS_Cond_Conf.MeanADE(AlloData_SPSS_Cond_Conf.ParticipantGroup == 1 & AlloData_SPSS_Cond_Conf.ConfigurationType == conftype & AlloData_SPSS_Cond_Conf.TrialType == trialtype );
-Older.ADE.Sample = AlloData_SPSS_Cond_Conf.MeanADE(AlloData_SPSS_Cond_Conf.ParticipantGroup == 2 & AlloData_SPSS_Cond_Conf.ConfigurationType == conftype & AlloData_SPSS_Cond_Conf.TrialType == trialtype );
-RetrievalTime.Young.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantGroup == 1 & AlloData_SPSS_Cond_Conf.ConfigurationType == conftype & AlloData_SPSS_Cond_Conf.TrialType == trialtype );
-Elderly_RT.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantGroup == 2 & AlloData_SPSS_Cond_Conf.ConfigurationType == conftype & AlloData_SPSS_Cond_Conf.TrialType == trialtype );
-
-CreateCustomFigure;
-subplot(2,1,1)
-%scatter(RetrievalTime.Young.Sample,Young.ADE.Sample);
-hold on
-tbl = table(RetrievalTime.Young.Sample, Young.ADE.Sample);
-tbl.Properties.VariableNames = {'RT' 'ADE'};
-mdl = fitlm(tbl,'linear')
-plot(mdl);
-hold off
-
-subplot(2,1,2)
-%scatter(Elderly_RT.Sample,Older.ADE.Sample);
-hold on
-tbl = table(Elderly_RT.Sample,Older.ADE.Sample);
-tbl.Properties.VariableNames = {'RT' 'ADE'};
-mdl = fitlm(tbl,'linear')
-plot(mdl);
-axis equal
-hold off
-
-clearvars -except AlloData AlloData_SPSS_Cond_Conf HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config
 
 %% Analysis of ade vs retrieval time
 
@@ -241,100 +210,5 @@ print(svgFile, '-dsvg'); % Save as SVG
 
 disp(['Figure saved as ' pngFile ' and ' svgFile]);
 
-
-%
 clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config RetrievalTime
-%%
-
-Young.ADE.Sample = AlloData_SPSS_Cond_Conf.MeanADE(AlloData_SPSS_Cond_Conf.ParticipantGroup == 1 & AlloData_SPSS_Cond_Conf.ConfigurationType == young_conftype & AlloData_SPSS_Cond_Conf.TrialType == young_trialtype );
-Older.ADE.Sample = AlloData_SPSS_Cond_Conf.MeanADE(AlloData_SPSS_Cond_Conf.ParticipantGroup == 2 & AlloData_SPSS_Cond_Conf.ConfigurationType == elder_conftype & AlloData_SPSS_Cond_Conf.TrialType == elder_trialtype );
-Young_RT.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantGroup == 1 & AlloData_SPSS_Cond_Conf.ConfigurationType == young_conftype & AlloData_SPSS_Cond_Conf.TrialType == young_trialtype );
-Elderly_RT.Sample  = AlloData_SPSS_Cond_Conf.MeanRT(AlloData_SPSS_Cond_Conf.ParticipantGroup == 2 & AlloData_SPSS_Cond_Conf.ConfigurationType == elder_conftype & AlloData_SPSS_Cond_Conf.TrialType == elder_trialtype );
-
-Young.ADE.Sample(isoutlier(Young.ADE.Sample,'grubbs')) = nan;
-Older.ADE.Sample(isoutlier(Older.ADE.Sample,'grubbs')) = nan;
-Young_RT.Sample(isoutlier(Young_RT.Sample,'grubbs')) = nan;
-Elderly_RT.Sample(isoutlier(Elderly_RT.Sample,'grubbs')) = nan;
-
-groupColors = [config.colorPalette.elderly; config.colorPalette.young];
-
-CreateCustomFigure;
-subplot(1,2,1)
-%scatter(Young_RT.Sample,Young.ADE.Sample);
-hold on
-tbl = table(Young_RT.Sample, Young.ADE.Sample);
-tbl.Properties.VariableNames = {'RT' 'ADE'};
-mdl = fitlm(tbl,'linear','RobustOpts','on')
-p = plot(mdl);
-data = p(1,1);
-data.MarkerEdgeColor = 'none';
-data.MarkerFaceColor = [groupColors(2,:)];
-data.Marker = 'o';
-data.MarkerSize = 10;
-data.Color = [groupColors(2,:) 0.2];
-fit = p(2,1);
-fit.Color = [groupColors(2,:)*0.2 0.7];
-fit.LineWidth = 2;
-cb = p(3,1);
-cb.Color = [groupColors(2,:) 0.6];
-cb.LineWidth = 2;
-%cb = p(4,1);
-%cb.Color = [groupColors(2,:) 0.6];
-%cb.LineWidth = 2;
-legend('off');
-l = legend([data], {'Young'});
-hold off
-
-ax = gca;
-ax.Title.String = '';
-ax.FontName = 'Times New Roman';
-ax.FontSize = 20;
-ax.YLabel.Interpreter = 'tex';
-ax.YLabel.String = {'ADE({\mu})'};
-ylim([0 5]);
-ax.XLabel.Interpreter = 'tex';
-ax.XLabel.String = {'RT({\mu})'};
-xlim([0 12]);
-
-subplot(1,2,2)
-%scatter(Elderly_RT.Sample,Older.ADE.Sample);
-hold on
-tbl = table(Elderly_RT.Sample,Older.ADE.Sample + 1.4);
-tbl.Properties.VariableNames = {'RT' 'ADE'};
-mdl = fitlm(tbl,'linear','RobustOpts','on')
-
-p = plot(mdl);
-data = p(1,1);
-data.MarkerEdgeColor = 'none';
-data.MarkerFaceColor = [groupColors(1,:)];
-data.Marker = 'o';
-data.MarkerSize = 10;
-data.Color = [groupColors(1,:) 0.2];
-fit = p(2,1);
-fit.Color = [groupColors(1,:)*0.5 0.7];
-fit.LineWidth = 2;
-cb = p(3,1);
-cb.Color = [groupColors(1,:) 0.6];
-cb.LineWidth = 2;
-%cb = p(4,1);
-%cb.Color = [groupColors(1,:) 0.6];
-%cb.LineWidth = 2;
-legend('off');
-l = legend([data], {'Elderly'});
-hold off
-ax = gca;
-
-ax.Title.String = '';
-ax.FontName = 'Times New Roman';
-ax.FontSize = 20;
-ax.YLabel.Interpreter = 'tex';
-ax.YLabel.String = {'ADE({\mu})'};
-ylim([0 5]);
-ax.XLabel.Interpreter = 'tex';
-ax.XLabel.String = {'RT({\mu})'};
-xlim([0 12]);
-
-%%
-clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config RetrievalTime
-
 
