@@ -49,6 +49,7 @@ config.plotSettings.MarkerScatterSize = 40;       % Marker scatter size
 config.plotSettings.MarkerScatterFaceAlpha = 0.7;       % Marker scatter size
 config.plotSettings.MarkerScatterEdgeAlpha = 0.9;       % Marker scatter size
 config.plotSettings.LineWidth = 2;        % Line width
+config.plotSettings.LineViolinWidth = 1.5; 
 config.plotSettings.AxisLineWidth = 1;    % Axis line width
 config.plotSettings.FontSize = 9;        % Font size for axes
 config.plotSettings.FontLabelSize = 11;        % Font size for labels
