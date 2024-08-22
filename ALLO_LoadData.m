@@ -37,7 +37,12 @@ config.colorPalette.lightGray = [75/255, 75/255, 75/255]; % #474747
 config.colorPalette.darkGray = [40/255, 40/255, 40/255]; % #474747
 config.colorPalette.darkYoung = [20/255, 48/255, 62/255]; % #14303E
 config.colorPalette.darkElderly = [75/255, 6/255, 6/255]; % #4B0606
-
+config.colorPalette.GrayScale =  [
+    211/255, 211/255, 211/255;  % #d3d3d3
+    153/255, 153/255, 153/255;  % #999999
+    105/255, 105/255, 105/255;  % #696969
+    28/255, 28/255, 28/255      % #1c1c1c
+];
 
 config.plotSettings.MarkerSize = 6;       % Marker size
 config.plotSettings.MarkerScatterSize = 40;       % Marker scatter size
@@ -45,8 +50,9 @@ config.plotSettings.MarkerScatterFaceAlpha = 0.7;       % Marker scatter size
 config.plotSettings.MarkerScatterEdgeAlpha = 0.9;       % Marker scatter size
 config.plotSettings.LineWidth = 2;        % Line width
 config.plotSettings.AxisLineWidth = 1;    % Axis line width
-config.plotSettings.FontSize = 9;        % Font size for axes labels
-config.plotSettings.FontTitleSize = 11;
+config.plotSettings.FontSize = 9;        % Font size for axes
+config.plotSettings.FontLabelSize = 11;        % Font size for labels
+config.plotSettings.FontTitleSize = 12;
 config.plotSettings.Width = 600;          % Width of the figure
 config.plotSettings.Height = 400;         % Height of the figure
 config.plotSettings.FontName = 'Arial';

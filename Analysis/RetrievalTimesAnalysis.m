@@ -94,12 +94,12 @@ ax.YColor = 'black'; % Set color for left Y-axis
 % Customize Y axis label
 ax.YLabel.Interpreter = 'tex';
 ax.YLabel.String = {'probability'};
-ax.YLabel.FontSize = fontSize + 2;
+ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
 
 % Customize X axis label
 ax.XLabel.Interpreter = 'tex';
 ax.XLabel.String = {'bootstrapped mean retrieval time (s)'};
-ax.XLabel.FontSize = fontSize + 2;
+ax.XLabel.FontSize = config.plotSettings.FontLabelSize;
 
 % Ensure the Output folder exists
 outputFolder = 'Output';
@@ -113,7 +113,6 @@ svgFile = fullfile(outputFolder, 'retrievaltimeageing.svg');
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
-
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
 
@@ -184,12 +183,18 @@ plot(xRange, elderlyCI(:,2), '--', 'Color', [elderColor * 0.8 0.5], 'LineWidth',
 ax = gca;
 ax.XAxis.LineWidth = axisLineWidth;
 ax.YAxis.LineWidth = axisLineWidth;
+ax.Title.String = '';
 ax.FontName = config.plotSettings.FontName;
 ax.FontSize = fontSize;
+
 ax.Box = 'off';  % Remove top and right axes
+ax.XColor = 'black'; % Set color for bottom X-axis
+ax.YColor = 'black'; % Set color for left Y-axis
 
 xlabel('mean retrieval time (s)');
+ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
 ylabel('mean absolute distance error (m)');
+ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
 legend({'Young', 'Elderly'}, 'Location', 'best');
 
 % Ensure the Output folder exists

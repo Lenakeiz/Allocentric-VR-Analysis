@@ -1,4 +1,5 @@
 HC_NeuroPsychData  = readtable(['ALLO_Neuropsychology_Battery.csv']);
+HC_NeuroPsychData = HC_NeuroPsychData(HC_NeuroPsychData.Status=='HC');
 
 AlloData_Elderly_4MT = cell2table(cell(0,5));%array2table(zeros(size(uniqueID,1) * 6,6) );
 AlloData_Elderly_4MT.Properties.VariableNames = {'ParticipantID', 'ParticipantGroup', 'MeanADE', 'MeanRT', 'FourMT'};

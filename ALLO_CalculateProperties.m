@@ -20,7 +20,7 @@ for i = 1:size(uniqueID,1)
     end
 end
 
-%Calculating grand mean for each participant
+%Calculating mean for each participant
 AlloData_SPSS_Cond_Conf = cell2table(cell(0,6));%array2table(zeros(size(uniqueID,1) * 6,6) );
 AlloData_SPSS_Cond_Conf.Properties.VariableNames = {'ParticipantID', 'ParticipantGroup', 'ConfigurationType', 'TrialType', 'MeanADE', 'MeanRT'};
 AlloData_SPSS_Cond_Conf_Block = cell2table(cell(0,7));%array2table(zeros(size(uniqueID,1) * 6,6) );

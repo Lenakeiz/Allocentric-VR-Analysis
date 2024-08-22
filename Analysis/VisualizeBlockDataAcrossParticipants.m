@@ -1,6 +1,8 @@
 %Calculating means per block per participant
 
-tempData = AlloData_SPSS_Cond_Conf_BlockVirtual(:,[1 5 6]);
+%tempData = AlloData_SPSS_Cond_Conf_BlockVirtual(:,[1 5 6]);
+tempData = AlloData_SPSS_Cond_Conf_Block(:,[1 5 6]);
+
 %tempData.MeanADE = log(tempData.MeanADE);
 
 tempDataBlock = tempData(tempData.BlockNumber == 1,:);
@@ -31,7 +33,7 @@ conds = [ones(44,1);ones(44,1)*2;ones(44,1)*3];
 CreateCustomFigure;
 
 jitter = 0.6;
-groupColors = cbrewer('seq', 'Greys', 7);
+groupColors = config.colorPalette.GrayScale;
 
 plotone = notBoxPlot(blocks,conds, 'jitter', jitter, 'interval', 'tInterval');
 hold on;
@@ -44,11 +46,11 @@ for ii=1:length(plotone)
         plotone(ii).data.MarkerEdgeColor = [0.5 0.5 0.5];
         plotone(ii).data.MarkerEdgeAlpha = 0.6;
         plotone(ii).data.SizeData = 200;
-        plotone(ii).sdPtch.FaceColor = groupColors(3,:);
+        plotone(ii).sdPtch.FaceColor = groupColors(1,:);
         plotone(ii).sdPtch.EdgeColor = 'none';
-        plotone(ii).semPtch.FaceColor = groupColors(5,:);
+        plotone(ii).semPtch.FaceColor = groupColors(2,:);
         plotone(ii).semPtch.EdgeColor = 'none';
-        plotone(ii).mu.Color = groupColors(7,:);
+        plotone(ii).mu.Color = groupColors(3,:);
         plotone(ii).data.MarkerFaceColor = groupColors(4,:);
         plotone(ii).data.MarkerFaceAlpha = 0.7;
     end
