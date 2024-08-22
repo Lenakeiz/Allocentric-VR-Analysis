@@ -43,6 +43,11 @@ config.colorPalette.GrayScale =  [
     105/255, 105/255, 105/255;  % #696969
     28/255, 28/255, 28/255      % #1c1c1c
 ];
+config.colorPalette.GrayScaleThreePoints =  [
+    222/255, 222/255, 222/255;
+    148/255, 148/255, 148/255;     
+    74/255, 74/255, 74/255
+];
 
 config.plotSettings.MarkerSize = 6;       % Marker size
 config.plotSettings.MarkerScatterSize = 40;       % Marker scatter size

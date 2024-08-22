@@ -101,27 +101,6 @@ for i = 1:length(y_data)
         'MarkerEdgeColor', colors{i}, 'MarkerFaceAlpha', 0.3, 'MarkerEdgeAlpha', 0.6);
 end
 
-% % Connect data points for the same participant
-% unique_participants = unique([participant_ids{:}]);
-% for i = 1:length(unique_participants)
-%     participant_id = unique_participants(i);
-%     participant_data = nan(1, length(y_data));
-%     participant_positions = nan(1, length(y_data));
-% 
-%     for j = 1:length(y_data)
-%         idx = participant_ids{j} == participant_id;
-%         if any(idx)
-%             participant_data(j) = y_data{j}(idx);
-%             participant_positions(j) = positions(j);
-%         end
-%     end
-% 
-%     if all(~isnan(participant_data))
-%         % Plot a line connecting the data points for this participant
-%         plot(participant_positions, participant_data, '-o', 'Color', [0.5 0.5 0.5 0.2], 'LineWidth', 1.2);
-%     end
-% end
-
 % Means
 for i = 1:length(y_data)
     mean_val = mean(y_data{i});

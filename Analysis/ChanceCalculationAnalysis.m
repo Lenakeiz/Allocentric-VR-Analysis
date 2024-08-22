@@ -72,8 +72,8 @@ alphaChance = 0.3;
 multiplierForCircularSectors = 1.5;
 
 % Desired figure size
-plotWidthInches = 5;  % Width in inches
-plotHeightInches = 3; % Height in inches
+plotWidthInches = 5.0;  % Width in inches
+plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;
 
@@ -132,8 +132,9 @@ rlim([0 6]);
 rticks([0 2 4 6]);
 rticklabels({'0m','2m','4m'});
 ax.RAxis.TickLabels = {'' '2m' '4m'};
+ax.RAxis.FontSize = fontSize;
 ax.ThetaAxis.TickLabels = {'0' '\pi/6' '\pi/3' '\pi/2' '2\pi/3' '5\pi/6' '\pi' '7\pi/6' '4\pi/3' '3\pi/2' '5\pi/3' '11\pi/6'};
-
+ax.ThetaAxis.FontSize = fontSize;
 %% --- Elderly plot ---
 subplot(1,2,2);
 
