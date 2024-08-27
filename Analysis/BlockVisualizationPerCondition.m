@@ -47,7 +47,7 @@ flattened_y_data = [y_data{1, :}, y_data{2, :}, y_data{3, :}];
 colors = {config.colorPalette.GrayScaleThreePoints(1,:), config.colorPalette.GrayScaleThreePoints(2,:), config.colorPalette.GrayScaleThreePoints(3,:)};
 mean_color = config.colorPalette.GrayScale(4,:);
 x_label = 'movement condition';
-y_label = 'mean absolute error distance (m)';
+y_label = 'absolute error distance (m)';
 x_categories = {'same-view', 'shifted-view (walk)', 'shifted-view (teleport)'};
 
 % Horizontal lines for reference (optional)

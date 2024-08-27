@@ -5,48 +5,21 @@ AlloDataBlock = AlloData(:, {'ParticipantID', 'ParticipantGroup', 'TrialNumber',
 % averaged for that column
 AlloDataBlock = AlloDataBlock(~isnan(AlloDataBlock.MeanAbsError), :);
 
-% Create the block column
-AlloDataBlock.Block = arrayfun(@(x) floor((x - 1) / 10) + 1, AlloDataBlock.TrialNumber);
-
-% Calculating the block-wise mean for each participant
 funcOmitNan = @(x) mean(x,"omitnan"); 
-blockwiseMeans = varfun(funcOmitNan, AlloDataBlock, 'InputVariables', 'MeanAbsError', ...
-                        'GroupingVariables', {'ParticipantID', 'Block'});
+groupwiseMeans = varfun(funcOmitNan, AlloDataBlock, 'InputVariables', 'MeanAbsError', ...
+                        'GroupingVariables', {'ParticipantID', 'ParticipantGroup'});
 
-% Getting data for each block for plotting
-violinDataBlock1 = blockwiseMeans.Fun_MeanAbsError(blockwiseMeans.Block == 1);
-violinDataBlock2 = blockwiseMeans.Fun_MeanAbsError(blockwiseMeans.Block == 2);
-violinDataBlock3 = blockwiseMeans.Fun_MeanAbsError(blockwiseMeans.Block == 3);
+% Separate data by participant group
+youngData = groupwiseMeans.Fun_MeanAbsError(groupwiseMeans.ParticipantGroup == 1);
+elderlyData = groupwiseMeans.Fun_MeanAbsError(groupwiseMeans.ParticipantGroup == 2);
 
-y_data = {violinDataBlock1, violinDataBlock2, violinDataBlock3};
-
-% Get Participant IDs for each block
-participantIDsBlock1 = blockwiseMeans.ParticipantID(blockwiseMeans.Block == 1);
-participantIDsBlock2 = blockwiseMeans.ParticipantID(blockwiseMeans.Block == 2);
-participantIDsBlock3 = blockwiseMeans.ParticipantID(blockwiseMeans.Block == 3);
-
-% Concatenate participant IDs to match the y_data structure
-participant_ids = {participantIDsBlock1, participantIDsBlock2, participantIDsBlock3};
-
-colors = {config.colorPalette.GrayScale(2,:), config.colorPalette.GrayScale(2,:), config.colorPalette.GrayScale(2,:)};
-
-% Define color for the mean points
-mean_color = config.colorPalette.GrayScale(4,:);  % Dark red color for the mean points
-
-% Labels and categories
-x_label = 'block';
-y_label = 'absolute error distance (m)';
-x_categories = {'1', '2', '3'};
-
-% Horizontal lines for reference (optional)
-hlines = [1.0, 2.0, 3.0, 4.0];
-
-% y-axis limits
-ylims = [0, 5.0];
+% Combine data into a cell array for ease of plotting
+y_data = {youngData, elderlyData};
+x_categories = {'Young', 'Elderly'};
 
 %% ------ Plotting section ------ 
 % Desired figure size
-plotWidthInches = 3.0;  % Width in inches
+plotWidthInches = 2.0;  % Width in inches
 plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;
@@ -68,6 +41,14 @@ set(gca, 'Color', 'white');
 % Positions for the data
 positions = 1:length(y_data);
 
+ylims = [0, 5.5];
+hlines = [1,2,3,4,5];
+colors = {config.colorPalette.young, config.colorPalette.elderly};  % Colors for scatter points
+x_label = 'age group'
+y_label = 'absolute distance error (m)'
+
+mean_color = config.colorPalette.GrayScale(4,:);
+
 % Add horizontal lines if any
 if ~isempty(hlines)
     for i = 1:length(hlines)
@@ -88,7 +69,7 @@ end
 
 % Box plots
 for i = 1:length(y_data)
-    box_handle = boxplot(y_data{i}, 'Positions', positions(i), 'Widths', 0.45, 'Colors', [116, 116, 115] / 255, ...
+    box_handle = boxplot(y_data{i}, 'Positions', positions(i), 'Widths', 0.45, 'Colors', colors{i} * 0.75, ...
         'MedianStyle', 'line', 'OutlierSize', 0.1, 'Symbol', '', 'BoxStyle', 'outline');
     set(box_handle,{'linew'},{2})
 end
@@ -126,6 +107,14 @@ ax.Box = 'off';  % Remove top and right axes
 ax.XColor = 'black'; % Set color for bottom X-axis
 ax.YColor = 'black'; % Set color for left Y-axis
 
+yMax = 5;  % Get the maximum y value from the y-axis limit
+lineY = yMax + 0.1;  % Position for the line slightly below the yMax
+textY = lineY + 0.2;  % Position for the 'n.s.' text slightly above the line
+
+% Plot the main age effect results (please check the SPSS output)
+plot([1, 2], [lineY, lineY], 'k-', 'LineWidth', 1.5);
+text(mean([1, 2]), textY, '***', 'FontSize', 9, 'HorizontalAlignment', 'center');
+
 % Set labels
 set(gca, 'XTick', positions, 'XTickLabel', x_categories, 'XLabel', text('String', x_label, 'FontSize', config.plotSettings.FontLabelSize), ...
     'YLabel', text('String', y_label, 'FontSize', config.plotSettings.FontLabelSize));
@@ -137,8 +126,8 @@ if ~exist(outputFolder, 'dir')
 end
 
 % Define the full paths for saving
-pngFile = fullfile(outputFolder, 'block_visualization.png');
-svgFile = fullfile(outputFolder, 'block_visualization.svg');
+pngFile = fullfile(outputFolder, 'agemaineffect.png');
+svgFile = fullfile(outputFolder, 'agemaineffect.svg');
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
@@ -151,5 +140,4 @@ disp(['Figure saved as ' pngFile ' and ' svgFile]);
 hold off;
 
 %% Clearing the workspace
-
 clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config RetrievalTime
