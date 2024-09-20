@@ -13,6 +13,7 @@ funcOmitNan = @(x) mean(x,"omitnan");
 groupedMeans = varfun(funcOmitNan, AlloDataBlock, 'InputVariables', 'MeanAbsError', ...
                         'GroupingVariables', {'ParticipantID', 'TrialType', 'Block'});
 
+%% 
 % Prepare data for plotting by grouping by TrialType and Block
 % Each TrialType will have three blocks of data
 y_data = cell(3, 3); % 3 TrialTypes x 3 Blocks

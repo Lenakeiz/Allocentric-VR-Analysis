@@ -62,10 +62,9 @@ for i = 1:length(y_data)
     [f, xi] = kde(y_data{i}, 'Bandwidth', 0.3, Support="nonnegative");
     f = f / max(f); % Normalize the density values
     f = 0.25 * f;   % Adjust the width of the violin
-    % for visualization purpose
-    cut_violin = xi <= 4.5;
 
-    % Truncate xi and f to remove values beyond 4.5
+    % For visualization purposes
+    cut_violin = xi <= 4.5;
     xi = xi(cut_violin);
     f = f(cut_violin);
     
@@ -147,6 +146,7 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, 'movementconditionmaineffect.png');
 svgFile = fullfile(outputFolder, 'movementconditionmaineffect.svg');
+pdfFile = fullfile(outputFolder, 'movementconditionmaineffect.pdf');
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
@@ -154,7 +154,10 @@ print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified reso
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
 
-disp(['Figure saved as ' pngFile ' and ' svgFile]);
+% Save the figure as a PDF with high resolution (300 dpi)
+print(pdfFile, '-dpdf', ['-r' num2str(dpi)]);
+
+disp(['Figure saved as ' pngFile ', ' svgFile, ' and ', pdfFile]);
 
 hold off;
 
