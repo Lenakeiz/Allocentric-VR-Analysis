@@ -2,10 +2,10 @@
 % % Loading data for the iVR
 % % 
 % % TrialType:
-% %     WALKEGO = 1; % participants walk back and forth to the same
+% %     Same-viewpoint = 1; % participants walk back and forth to the same
 % viewpoint
-% %     WALKALLO = 2; % participant walk to the shifted viewpoint
-% %     TELEPORT = 3; % participant is teleported to the shifted viewpoint
+% %     Shifted-viewpoint (walking) = 2; % participant walk to the shifted viewpoint
+% %     Shifted-viewpoint (teleport) = 3; % participant is teleported to the shifted viewpoint
 % % 
 % % ParticipantGroup:
 % %     YC  = 1; Young controls
@@ -34,8 +34,11 @@ folderHealthyControl = strcat(folderpath,'\HC\');
 config.colorPalette.young = [45/255, 114/255, 143/255]; % #2D728F
 config.colorPalette.elderly = [243/255, 63/255, 63/255]; % #F33F3F
 config.colorPalette.lightGray = [75/255, 75/255, 75/255]; % #474747
-config.colorPalette.one_object = [243/255, 63/255, 63/255]; %#F33F3F
-config.colorPalette.four_object = 
+config.colorPalette.one_object = [140/255, 216/255, 103/255]; %#8CD867
+config.colorPalette.four_object = [47/255, 191/255, 113/255];%#2FBF71
+config.colorPalette.same_viewpoint = [253/255, 231/255, 76/255];   % #FDE74C;
+config.colorPalette.shifted_viewpoint_walk = [99/255, 83/255, 91/255];     % #63535B;
+config.colorPalette.shifted_viewpoint_teleport = [150/255, 52/255, 132/255];   % #963484;
 config.colorPalette.darkGray = [40/255, 40/255, 40/255]; % #474747
 config.colorPalette.darkYoung = [20/255, 48/255, 62/255]; % #14303E
 config.colorPalette.darkElderly = [75/255, 6/255, 6/255]; % #4B0606

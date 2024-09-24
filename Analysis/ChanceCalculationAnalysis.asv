@@ -235,9 +235,9 @@ print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified reso
 print(svgFile, '-dsvg'); % Save as SVG
 
 % Save the figure as SVG with a tight layout
-print(pdfFile, '-dpdf', ['-r' num2str(dpi)]); % Save as SVG
+print(pdfFile, '-dsvg'); % Save as SVG
 
-disp(['Figure saved as ' pngFile ' and ' svgFile ' and ' pdfFile]);
+disp(['Figure saved as ' pngFile ' and ' svgFile]);
 
 end
 

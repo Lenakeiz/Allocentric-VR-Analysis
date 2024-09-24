@@ -2,10 +2,10 @@
 % % Loading data for the iVR
 % % 
 % % TrialType:
-% %     WALKEGO = 1; % participants walk back and forth to the same
+% %     Same-viewpoint = 1; % participants walk back and forth to the same
 % viewpoint
-% %     WALKALLO = 2; % participant walk to the shifted viewpoint
-% %     TELEPORT = 3; % participant is teleported to the shifted viewpoint
+% %     Shifted-viewpoint (walking) = 2; % participant walk to the shifted viewpoint
+% %     Shifted-viewpoint (teleport) = 3; % participant is teleported to the shifted viewpoint
 % % 
 % % ParticipantGroup:
 % %     YC  = 1; Young controls
