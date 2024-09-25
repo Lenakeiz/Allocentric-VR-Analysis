@@ -74,7 +74,7 @@ fprintf('t-Test Results: p-value = %.4f, CI = [%.4f, %.4f], t-stat = %.4f, df = 
 colors = {config.colorPalette.same_viewpoint, config.colorPalette.shifted_viewpoint_walk, config.colorPalette.shifted_viewpoint_teleport};  % Colors for scatter points
 mean_color = config.colorPalette.GrayScale(4,:);
 x_label = 'age group';
-y_label = 'absolute error distance (m)';
+y_label = ['absolute distance error (m)'];
 x_categories = {'young', 'elderly'};
 
 % Horizontal lines for reference (optional)
@@ -84,7 +84,7 @@ hlines = [2.0, 4.0, 6.0];
 ylims = [0, 6.0];
 
 % Desired figure size
-plotWidthInches = 5.0;  % Width in inches
+plotWidthInches = 6.0;  % Width in inches
 plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;

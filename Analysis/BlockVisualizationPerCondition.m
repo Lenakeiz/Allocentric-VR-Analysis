@@ -48,7 +48,7 @@ flattened_y_data = [y_data{1, :}, y_data{2, :}, y_data{3, :}];
 colors = {config.colorPalette.GrayScaleThreePoints(1,:), config.colorPalette.GrayScaleThreePoints(2,:), config.colorPalette.GrayScaleThreePoints(3,:)};
 mean_color = config.colorPalette.GrayScale(4,:);
 x_label = 'movement condition';
-y_label = 'absolute error distance (m)';
+y_label = 'absolute distance error (m)';
 x_categories = {'same-view', 'shifted-view (walk)', 'shifted-view (teleport)'};
 
 % Horizontal lines for reference (optional)
@@ -170,6 +170,8 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, 'block_visualization_per_condition.png');
 svgFile = fullfile(outputFolder, 'block_visualization_per_condition.svg');
+pdfFile = fullfile(outputFolder, 'block_visualization_per_condition.pdf');
+
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
@@ -177,6 +179,9 @@ print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified reso
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
 
-disp(['Figure saved as ' pngFile ' and ' svgFile]);
+print(pdfFile, '-dpdf',  ['-r' num2str(dpi)]); % Save as PDF with specified resolution
+
+
+disp(['Figure saved as ' pngFile ' and ' svgFile ' and ' pdfFile]);
 
 hold off;

@@ -72,7 +72,7 @@ alphaChance = 0.3;
 multiplierForCircularSectors = 1.5;
 
 % Desired figure size
-plotWidthInches = 5.0;  % Width in inches
+plotWidthInches = 3.5;  % Width in inches
 plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;

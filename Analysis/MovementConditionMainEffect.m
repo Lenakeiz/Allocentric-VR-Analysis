@@ -20,7 +20,7 @@ x_categories = {'same-view', 'shifted-view (walk)', 'shifted-view (teleport)'};
 
 %% ------ Plotting section ------ 
 % Desired figure size
-plotWidthInches = 4.0;  % Width in inches
+plotWidthInches = 3.85;  % Width in inches
 plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;

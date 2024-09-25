@@ -19,7 +19,7 @@ x_categories = {'1-obj', '4-obj'};
 
 %% ------ Plotting section ------ 
 % Desired figure size
-plotWidthInches = 2.0;  % Width in inches
+plotWidthInches = 2.25;  % Width in inches
 plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;
@@ -128,14 +128,17 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, 'configurationmaineffect.png');
 svgFile = fullfile(outputFolder, 'configurationmaineffect.svg');
-
+pdfFile = fullfile(outputFolder, 'configurationmaineffect.pdf');
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
 
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
 
-disp(['Figure saved as ' pngFile ' and ' svgFile]);
+print(pdfFile, '-dpdf',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
+
+
+disp(['Figure saved as ' pngFile ' and ' svgFile ' and ' pdfFile]);
 
 hold off;
 

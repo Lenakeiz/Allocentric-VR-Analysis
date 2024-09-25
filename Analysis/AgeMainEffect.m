@@ -19,7 +19,7 @@ x_categories = {'Young', 'Elderly'};
 
 %% ------ Plotting section ------ 
 % Desired figure size
-plotWidthInches = 2.0;  % Width in inches
+plotWidthInches = 2.25;  % Width in inches
 plotHeightInches = 2.5; % Height in inches
 
 dpi = 300;
@@ -128,6 +128,8 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, 'agemaineffect.png');
 svgFile = fullfile(outputFolder, 'agemaineffect.svg');
+pdfFile = fullfile(outputFolder, 'agemaineffect.pdf');
+
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
@@ -135,7 +137,10 @@ print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified reso
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
 
-disp(['Figure saved as ' pngFile ' and ' svgFile]);
+% Save the figure as PNG with the specified DPI
+print(pdfFile, '-dpdf',  ['-r' num2str(dpi)]);
+
+disp(['Figure saved as ' pngFile ' and ' svgFile ' and ' pdfFile]);
 
 hold off;
 

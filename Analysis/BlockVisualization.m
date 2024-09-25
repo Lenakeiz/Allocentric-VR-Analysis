@@ -35,7 +35,7 @@ mean_color = config.colorPalette.GrayScale(4,:);  % Dark red color for the mean 
 
 % Labels and categories
 x_label = 'block';
-y_label = 'absolute error distance (m)';
+y_label = 'absolute distance error (m)';
 x_categories = {'1', '2', '3'};
 
 % Horizontal lines for reference (optional)
@@ -139,6 +139,7 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, 'block_visualization.png');
 svgFile = fullfile(outputFolder, 'block_visualization.svg');
+pdfFile = fullfile(outputFolder, 'block_visualization.pdf');
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
@@ -146,7 +147,9 @@ print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified reso
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
 
-disp(['Figure saved as ' pngFile ' and ' svgFile]);
+print(pdfFile, '-dpdf',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
+
+disp(['Figure saved as ' pngFile ' and ' svgFile ' and ' pdfFile]);
 
 hold off;
 
