@@ -98,7 +98,7 @@ ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
 
 % Customize X axis label
 ax.XLabel.Interpreter = 'tex';
-ax.XLabel.String = {'bootstrapped mean retrieval time (s)'};
+ax.XLabel.String = {'bootstrapped retrieval time (s)'};
 ax.XLabel.FontSize = config.plotSettings.FontLabelSize;
 
 % Ensure the Output folder exists
@@ -110,11 +110,16 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, 'retrievaltimeageing.png');
 svgFile = fullfile(outputFolder, 'retrievaltimeageing.svg');
+pdfFile = fullfile(outputFolder, 'retrievaltimeageing.pdf');
+
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
+
+print(pdfFile, '-dpdf',  ['-r' num2str(dpi)]); 
+
 
 disp(['Figure saved as ' pngFile ' and ' svgFile]);
 
@@ -191,9 +196,9 @@ ax.Box = 'off';  % Remove top and right axes
 ax.XColor = 'black'; % Set color for bottom X-axis
 ax.YColor = 'black'; % Set color for left Y-axis
 
-xlabel('mean retrieval time (s)');
+xlabel('retrieval time (s)');
 ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
-ylabel('mean absolute distance error (m)');
+ylabel('absolute distance error (m)');
 ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
 legend({'Young', 'Elderly'}, 'Location', 'best');
 
@@ -206,12 +211,15 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, 'retrievaltimevsade.png');
 svgFile = fullfile(outputFolder, 'retrievaltimevsade.svg');
+pdffile = fullfile(outputFolder, 'retrievaltimevsade.pdf');
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
 
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
+
+print(pdffile, '-dpdf',  ['-r' num2str(dpi)]);
 
 disp(['Figure saved as ' pngFile ' and ' svgFile]);
 

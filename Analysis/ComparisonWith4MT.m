@@ -74,7 +74,7 @@ xlim([0, 15]);
 
 % Add the legend with R²_adjusted value
 legend('off')
-text(0.5, 0.5, ['R^{2}_{adj} = ' num2str(R2_adjusted, 2)], 'FontSize', fontSize, 'FontName', config.plotSettings.FontName);
+text(4, 5, ['p < 0.001, R^{2}_{adj} = ' num2str(R2_adjusted, 2)], 'FontSize', fontSize, 'FontName', config.plotSettings.FontName);
 
 % Ensure the Output folder exists
 outputFolder = 'Output';
@@ -85,12 +85,15 @@ end
 % Define the full paths for saving
 pngFile = fullfile(outputFolder, '4mtvsade.png');
 svgFile = fullfile(outputFolder, '4mtvsade.svg');
+pdfFile = fullfile(outputFolder, '4mtvsade.pdf');
 
 % Save the figure as PNG with the specified DPI
 print(pngFile, '-dpng',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
 
 % Save the figure as SVG with a tight layout
 print(svgFile, '-dsvg'); % Save as SVG
+
+print(pdfFile, '-dpdf',  ['-r' num2str(dpi)]); % Save as PNG with specified resolution
 
 disp(['Figure saved as ' pngFile ' and ' svgFile]);
 

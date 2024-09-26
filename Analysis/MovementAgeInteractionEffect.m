@@ -53,6 +53,11 @@ fprintf('Post-hoc comparison, young, same vs shifted-teleport\n');
 fprintf('t-Test Results: p-value = %.4f, CI = [%.4f, %.4f], t-stat = %.4f, df = %d\n\n', ...
         p, ci(1), ci(2), stats.tstat, stats.df);
 
+fprintf('Elderly mean values\n');
+fprintf('Same viewpoint m = %.4f sd = %.4f \n', mean(flattened_y_data{4}), std(flattened_y_data{4}));
+fprintf('Shifted viewpoint - walking m = %.4f sd = %.4f \n', mean(flattened_y_data{5}), std(flattened_y_data{5}));
+fprintf('Shifted viewpoint - teleporting m = %.4f sd = %.4f \n', mean(flattened_y_data{6}), std(flattened_y_data{6}));
+
 fprintf('Post-hoc comparison, elderly, same vs shifted-walking\n');
 [h, p, ci, stats] = ttest(flattened_y_data{4}, flattened_y_data{5});
 fprintf('t-Test Results: p-value = %.4f, CI = [%.4f, %.4f], t-stat = %.4f, df = %d\n\n', ...
