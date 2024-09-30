@@ -1,7 +1,7 @@
 Continuous update of the egocentric view via self-motion is beneficial to allocentric representations in ageing
 ======
 
-![Figure 1](https://github.com/Lenakeiz/Allocentric-VR-Analysis/blob/main/Images/Fig1a.png)
+![Figure 1](https://github.com/Lenakeiz/Allocentric-VR-Analysis/blob/main/Images/Fig1_smallSelection.png)
 
 ## Description 
 This repository contains the full dataset and the scripts for generating the analysis and the figures from _"Continuous update of the egocentric view via self-motion is beneficial to allocentric representations in ageing
