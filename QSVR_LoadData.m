@@ -125,11 +125,11 @@ clear excludedData sizeU
 
 %%
 % Calculate basic properties based on the cleaned AlloData
-ALLO_CalculateProperties;
+QSVR_CalculateProperties;
 
 %%
 % Add neuropsychological tests data to AlloData (elderly participant only)
-ALLO_AddNeuroPsychTest;
+QSVR_AddNeuroPsychTest;
 
 %% Cleaning
 % Turn on all warnings again
