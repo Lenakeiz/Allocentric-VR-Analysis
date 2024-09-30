@@ -299,3 +299,7 @@ bsSample.CI = bootci(N,@nanmean,selectedData.AbsError);
 [~,bsTtest.p,bsTtest.ci,bsTtest.stats] = ttest2(bsRand.Vector,bsSample.Vector);
 
 end
+
+%%
+clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config RetrievalTime
+

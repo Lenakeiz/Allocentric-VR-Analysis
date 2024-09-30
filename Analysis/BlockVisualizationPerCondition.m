@@ -185,3 +185,6 @@ print(pdfFile, '-dpdf',  ['-r' num2str(dpi)]); % Save as PDF with specified reso
 disp(['Figure saved as ' pngFile ' and ' svgFile ' and ' pdfFile]);
 
 hold off;
+
+%%
+clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config RetrievalTime

@@ -99,6 +99,11 @@ temMat = [a,temMat];
 temMat = array2table(temMat);
 temMat.Properties.VariableNames = {'Participant_Group' 'One_Ego_One' 'One_Ego_Two' 'One_Ego_Three' 'One_Walk_One' 'One_Walk_Two' 'One_Walk_Three' 'One_Tele_One' 'One_Tele_Two' 'One_Tele_Three' ...
                                    'Four_Ego_One' 'Four_Ego_Two' 'Four_Ego_Three' 'Four_Walk_One' 'Four_Walk_Two' 'Four_Walk_Three' 'Four_Tele_One' 'Four_Tele_Two' 'Four_Tele_Three'};
-writetable(temMat, 'SPSS_Conf_Cond_Block.csv', 'WriteVariableNames', true);
+
+outputFolder = 'Output';
+if ~exist(outputFolder, 'dir')
+    mkdir(outputFolder);
+end
+writetable(temMat, fullfile(outputFolder, 'SPSS_Conf_Cond_Block.csv'), 'WriteVariableNames', true);
 
 clear uniqueID uniqueTrials f i j hh ctype cti tempTable blockNumber tempTable_condconfblock temMat a blockNumberCell tempTable_condconfblockVirtual

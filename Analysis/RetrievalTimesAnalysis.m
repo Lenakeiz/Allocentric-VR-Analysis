@@ -223,5 +223,6 @@ print(pdffile, '-dpdf',  ['-r' num2str(dpi)]);
 
 disp(['Figure saved as ' pngFile ' and ' svgFile]);
 
+%%
 clearvars -except AlloData AlloData_Elderly_4MT HCData YCData AlloData_SPSS_Cond_Conf AlloData_SPSS_Cond_Conf_Block AlloData_SPSS_Cond_Conf_VirtualBlock config RetrievalTime
 
