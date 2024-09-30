@@ -8,7 +8,7 @@ This repository contains the full dataset and the scripts for generating the ana
 "_[^1]  
 
 ## Installation
-Clone the repository anywhere in your machine using `git clone`. 
+Clone the repository anywhere in your machine using `git clone` command. 
 Open the folder in Matlab by making sure to add folders and subfolders to the path.
 
 ## Package dependency
