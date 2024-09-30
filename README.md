@@ -18,7 +18,7 @@ Requires the following MATLAB toolboxes:
 
 - [Statistics and machine learning](https://uk.mathworks.com/products/statistics.html)
 
-## Use
+## Usage
 Start by running `QSVR_LoadData.m` to load, preprocess, and extract key metrics from the data.
 To generate figures from the paper, run the scripts in the **Analysis** folder. 
 Script names relate to the analyses they perform rather than to the specific figuer numbers. 
