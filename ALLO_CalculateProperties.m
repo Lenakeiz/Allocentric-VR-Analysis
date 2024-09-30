@@ -25,8 +25,6 @@ AlloData_SPSS_Cond_Conf = cell2table(cell(0,6));%array2table(zeros(size(uniqueID
 AlloData_SPSS_Cond_Conf.Properties.VariableNames = {'ParticipantID', 'ParticipantGroup', 'ConfigurationType', 'TrialType', 'MeanADE', 'MeanRT'};
 AlloData_SPSS_Cond_Conf_Block = cell2table(cell(0,7));%array2table(zeros(size(uniqueID,1) * 6,6) );
 AlloData_SPSS_Cond_Conf_Block.Properties.VariableNames = {'ParticipantID', 'ParticipantGroup', 'ConfigurationType', 'TrialType', 'BlockNumber','MeanADE', 'MeanRT'};
-AlloData_SPSS_Cond_Conf_BlockVirtual = cell2table(cell(0,7));%array2table(zeros(size(uniqueID,1) * 6,6) );
-AlloData_SPSS_Cond_Conf_BlockVirtual.Properties.VariableNames = {'ParticipantID', 'ParticipantGroup', 'ConfigurationType', 'TrialType', 'BlockNumber','MeanADE', 'MeanRT'};
 
 ctype = [1; 4];
 blockNumber = [1; 2; 3];
@@ -93,7 +91,6 @@ for i = 1:size(uniqueID,1)
     
     AlloData_SPSS_Cond_Conf       = [AlloData_SPSS_Cond_Conf; tempTable];
     AlloData_SPSS_Cond_Conf_Block = [AlloData_SPSS_Cond_Conf_Block; tempTable_condconfblock];
-    AlloData_SPSS_Cond_Conf_BlockVirtual = [AlloData_SPSS_Cond_Conf_BlockVirtual; tempTable_condconfblockVirtual];
 end
 
 temMat = reshape(AlloData_SPSS_Cond_Conf_Block.MeanADE,18,44)';
@@ -103,13 +100,5 @@ temMat = array2table(temMat);
 temMat.Properties.VariableNames = {'Participant_Group' 'One_Ego_One' 'One_Ego_Two' 'One_Ego_Three' 'One_Walk_One' 'One_Walk_Two' 'One_Walk_Three' 'One_Tele_One' 'One_Tele_Two' 'One_Tele_Three' ...
                                    'Four_Ego_One' 'Four_Ego_Two' 'Four_Ego_Three' 'Four_Walk_One' 'Four_Walk_Two' 'Four_Walk_Three' 'Four_Tele_One' 'Four_Tele_Two' 'Four_Tele_Three'};
 writetable(temMat, 'SPSS_Conf_Cond_Block.csv', 'WriteVariableNames', true);
-
-temMat = reshape(AlloData_SPSS_Cond_Conf_BlockVirtual.MeanADE,18,44)';
-a = [ones(21,1);ones(23,1)*2];
-temMat = [a,temMat];
-temMat = array2table(temMat);
-temMat.Properties.VariableNames = {'Participant_Group' 'One_Ego_One' 'One_Ego_Two' 'One_Ego_Three' 'One_Walk_One' 'One_Walk_Two' 'One_Walk_Three' 'One_Tele_One' 'One_Tele_Two' 'One_Tele_Three' ...
-                                   'Four_Ego_One' 'Four_Ego_Two' 'Four_Ego_Three' 'Four_Walk_One' 'Four_Walk_Two' 'Four_Walk_Three' 'Four_Tele_One' 'Four_Tele_Two' 'Four_Tele_Three'};
-writetable(temMat, 'SPSS_Conf_Cond_BlockVirtual.csv', 'WriteVariableNames', true);
 
 clear uniqueID uniqueTrials f i j hh ctype cti tempTable blockNumber tempTable_condconfblock temMat a blockNumberCell tempTable_condconfblockVirtual
