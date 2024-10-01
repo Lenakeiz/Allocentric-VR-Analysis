@@ -184,7 +184,7 @@ ax.RAxis.TickLabels = {'' '2m' '4m'};
 ax.ThetaAxis.TickLabels = {'0' '\pi/6' '\pi/3' '\pi/2' '2\pi/3' '5\pi/6' '\pi' '7\pi/6' '4\pi/3' '3\pi/2' '5\pi/3' '11\pi/6'};
 
 if (displayLegend == true)
-    leg = legend([line_mean_young line_chance_young line_mean_elderly line_chance_elderly],{'Young' 'Chance (Young)' 'Elderly' 'Chance (Elderly)'});
+    leg = legend([line_mean_young line_chance_young line_mean_elderly line_chance_elderly],{'Young' 'Chance (Young)' 'Older' 'Chance (Older)'});
 
     % Set the position of the legend manually
     leg.Position = [0.85 0.85 0.1 0.1];

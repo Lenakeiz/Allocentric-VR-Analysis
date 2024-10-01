@@ -78,7 +78,7 @@ plot([RetrievalTime.Young.Mean, RetrievalTime.Elderly.Mean], [lineY, lineY], 'k-
 text(mean([RetrievalTime.Young.Mean, RetrievalTime.Elderly.Mean]), starY, '***', 'FontSize', 18, 'HorizontalAlignment', 'center');
 
 ylim([0, starY + 0.05]);  % Adjust y-limits to fit the significance stars
-legend('Young', 'Elderly', 'Location','best');
+legend('young', 'older', 'Location','best');
 
 ax = gca;
 ax.XAxis.LineWidth = axisLineWidth;
@@ -200,7 +200,7 @@ xlabel('retrieval time (s)');
 ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
 ylabel('absolute distance error (m)');
 ax.YLabel.FontSize = config.plotSettings.FontLabelSize;
-legend({'Young', 'Elderly'}, 'Location', 'best');
+legend({'young', 'older'}, 'Location', 'best');
 
 % Ensure the Output folder exists
 outputFolder = 'Output';

@@ -15,7 +15,7 @@ elderlyData = groupwiseMeans.Fun_MeanAbsError(groupwiseMeans.ParticipantGroup ==
 
 % Combine data into a cell array for ease of plotting
 y_data = {youngData, elderlyData};
-x_categories = {'Young', 'Elderly'};
+x_categories = {'young', 'older'};
 
 %% ------ Plotting section ------ 
 % Desired figure size
@@ -44,8 +44,8 @@ positions = 1:length(y_data);
 ylims = [0, 5.5];
 hlines = [1,2,3,4,5];
 colors = {config.colorPalette.young, config.colorPalette.elderly};  % Colors for scatter points
-x_label = 'age group'
-y_label = 'absolute distance error (m)'
+x_label = 'age group';
+y_label = 'absolute distance error (m)';
 
 mean_color = config.colorPalette.GrayScale(4,:);
 

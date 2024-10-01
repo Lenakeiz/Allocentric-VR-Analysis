@@ -80,7 +80,7 @@ colors = {config.colorPalette.same_viewpoint, config.colorPalette.shifted_viewpo
 mean_color = config.colorPalette.GrayScale(4,:);
 x_label = 'age group';
 y_label = ['absolute distance error (m)'];
-x_categories = {'young', 'elderly'};
+x_categories = {'young', 'older'};
 
 % Horizontal lines for reference (optional)
 hlines = [2.0, 4.0, 6.0];
