@@ -29,4 +29,5 @@ For details on preprocessing and analysis, refer to the Methods section of the p
 
 ---
 [^1]: Andrea Castegnaro✉️, Alex Dior, Neil Burgess, John King
+
 ✉️ andrea.castegnaro.15@ucl.ac.uk
