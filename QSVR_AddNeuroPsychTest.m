@@ -1,4 +1,4 @@
-HC_NeuroPsychData = readtable(fullfile('Data', 'QSVR_Elderly_Neuropsychology_Battery.csv'));
+HC_NeuroPsychData = readtable(fullfile('Data', 'QSVR_Demographics_Neuropsychology_Battery.csv'));
 HC_NeuroPsychData = HC_NeuroPsychData(strcmp(HC_NeuroPsychData.Status, 'HC'), :);
 
 AlloData_Elderly_4MT = cell2table(cell(0,5));%array2table(zeros(size(uniqueID,1) * 6,6) );
